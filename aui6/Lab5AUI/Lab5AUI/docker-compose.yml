@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  lab1aui-man:
+    image: lab1aui-man
+    restart: always
+
+  lab1aui-job:
+    image: lab1aui-job
+    restart: always
+    environment:
+      MEMBERS_URL: "http://lab1aui-man:8080"
+
+  lab4-gateway:
+    image: lab4-gateway
+    restart: always
+    environment:
+      LAB4_MEMBER_URL: "http://lab1aui-man:8080"
+      LAB4_PROJECT_URL: "http://lab1aui-job:8080"
+      LAB4_GATEWAY_HOST: "lab4-gateway:8080"
+
+  lab5-aui:
+    image: lab5-aui
+    restart: always
+    environment:
+      API_URL: http://lab4-gateway:8080/api
+    ports:
+      - "8090:80"

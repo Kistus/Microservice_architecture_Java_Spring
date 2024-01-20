@@ -1,0 +1,49 @@
+<article *ngIf="project">
+  <header><h2>{{project.name}}</h2></header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-4">
+
+        <div class="row mb-2">
+          <div class="col-6">
+            Diffuculty:
+          </div>
+          <div class="col-6">
+            <span>{{project.difficulty}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<h2>Members</h2>
+
+  <table *ngIf="members">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let member of members.members">
+      <td>{{member.name}}</td>
+      <td>
+        <a [routerLink]="['/projects', project.id, 'members', member.id, 'edit']">Edit</a>
+      </td>
+      <td>
+        <button (click)="onDelete(member)">Delete</button>
+      </td>
+      <td>
+        <a [routerLink]="['/projects', project.id, 'members', member.id, 'details']">Details</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a [routerLink]="['/projects', project.id, 'members', 'create']">Create</a>
+
+</article>
